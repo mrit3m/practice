@@ -1,0 +1,470 @@
+itemgod
+izi
+17
+19:44
+19:50
+only news
+news
+2
+09:00
+09:50
+alaska
+good cinema
+2
+09:50
+10:50
+13 reasons why
+films
+2
+10:50
+11:50
+a technology program
+just news
+5
+11:50
+12:20
+a kitchen program
+entertainment
+6
+12:20
+13:00
+formula 1 racing show
+entertainment
+7
+13:00
+15:00
+brawl stars championship 
+entertainment
+18
+15:00
+16:00
+opera
+entertainment
+9
+16:00
+18:50
+opera
+entertainment
+17
+17:00
+18:50
+opera1
+entertainment
+17
+16:00
+18:55
+discovery show
+science
+10
+09:00
+10:30
+world news today
+news
+11
+10:30
+11:00
+stranger things
+series
+12
+20:00
+22:00
+the international
+esports
+13
+12:00
+15:00
+major tournament
+esports
+14
+15:00
+18:00
+healthy breakfast
+cooking
+15
+08:00
+08:45
+red bull cliff diving
+sports
+16
+14:00
+15:30
+beats for study
+music
+17
+00:00
+06:00
+savage kingdom
+nature
+18
+19:00
+20:30
+the last of us
+drama
+19
+21:00
+22:45
+naruto marathon
+anime
+20
+13:00
+17:00
+iphone review
+tech
+21
+18:00
+18:30
+market overview
+finance
+22
+09:30
+10:00
+morning yoga
+fitness
+23
+07:00
+08:00
+grandmaster tour
+hobby
+24
+16:00
+17:30
+bali walk
+travel
+25
+11:00
+12:00
+stand up comedy
+entertainment
+26
+22:00
+23:30
+ghost hunters
+horror
+27
+23:30
+01:00
+iss live
+science
+28
+10:00
+11:00
+cat compilation
+memes
+29
+12:00
+13:00
+wall street live
+finance
+30
+15:30
+17:00
+forest rain
+relax
+31
+22:00
+00:00
+world war ii
+history
+32
+14:00
+16:00
+minecraft stream
+gaming
+33
+17:00
+19:00
+paris fashion show
+fashion
+34
+20:00
+21:00
+physics experiments
+science
+35
+11:00
+12:00
+engine tuning
+auto
+36
+12:00
+13:30
+top 40 hits
+music
+37
+18:00
+20:00
+new trailers
+cinema
+38
+19:00
+19:30
+oil painting
+art
+39
+10:00
+11:30
+safari live
+nature
+40
+08:00
+10:00
+champions league
+sports
+41
+21:45
+23:45
+peppa pig
+kids
+42
+07:00
+09:00
+unsolved case
+mystery
+43
+21:00
+22:00
+hacker attack news
+tech
+44
+16:00
+16:30
+evening stretch
+yoga
+45
+19:00
+20:00
+drawing tutorial
+art
+46
+15:00
+16:00
+smooth jazz
+music
+47
+20:00
+22:00
+night interview
+talk show
+48
+23:00
+00:00
+abandoned places
+explore
+49
+13:00
+14:30
+speedrun world record
+gaming
+50
+22:00
+00:00
+space secrets
+science
+10
+11:00
+12:30
+animal planet
+nature
+10
+14:00
+15:30
+breaking news
+news
+11
+11:00
+12:00
+evening report
+news
+11
+18:00
+19:00
+witcher series
+series
+12
+22:00
+23:30
+black mirror
+series
+12
+00:00
+01:30
+pubg finals
+esports
+13
+15:30
+19:00
+ranked games
+gaming
+13
+19:00
+21:00
+cs global offensive
+esports
+14
+18:30
+20:00
+pro match live
+esports
+14
+20:00
+23:00
+italian pasta
+cooking
+15
+10:00
+11:00
+dessert master
+cooking
+15
+15:00
+16:00
+motocross mania
+sports
+16
+16:00
+17:30
+skateboarding pro
+sports
+16
+17:30
+18:30
+chill vibes
+music
+17
+06:00
+10:00
+night jazz mix
+music
+17
+22:00
+01:00
+oceans blue
+nature
+18
+10:00
+12:00
+amazon jungle
+nature
+18
+16:30
+18:00
+game of thrones
+drama
+19
+22:45
+00:00
+sopranos marathon
+drama
+19
+00:00
+03:00
+one piece
+anime
+20
+09:00
+11:00
+attack on titan
+anime
+20
+17:00
+19:00
+android vs ios
+tech
+21
+19:00
+20:00
+gadget unboxing
+tech
+21
+20:00
+21:00
+bitcoin pump
+finance
+22
+12:00
+13:00
+nft world
+finance
+22
+17:00
+18:00
+power cardio
+fitness
+23
+08:00
+09:00
+pilates session
+fitness
+23
+18:00
+19:00
+blitz tournament
+hobby
+24
+18:00
+20:00
+chess puzzles
+hobby
+24
+20:00
+21:00
+tokyo guide
+travel
+25
+13:00
+14:30
+london streets
+travel
+25
+17:00
+18:30
+roast battle
+entertainment
+26
+23:30
+01:00
+late night joke
+entertainment
+26
+01:00
+02:00
+slasher movie
+horror
+27
+01:00
+03:00
+dark stories
+horror
+27
+03:00
+04:00
+mars mission
+science
+28
+12:00
+14:00
+moon landing
+science
+28
+21:00
+22:30
+tiktok trend
+memes
+29
+14:00
+15:00
+dog videos
+memes
+29
+18:00
+19:00
+nasdaq live
+finance
+30
+17:30
+19:00
+trading strategy
+finance
+30
+20:00
+21:30

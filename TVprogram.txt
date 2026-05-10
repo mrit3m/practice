@@ -1,0 +1,51 @@
+itemchannel 6
+RR 0
+vipeRR 3
+ratTV 0
+bbc 0
+pepeFo 1
+khekhe 1
+f1 1
+brawl stars esports 0
+balet channel 1
+discovery 3
+cnn news 3
+netflix series 3
+dota2 main 3
+cs legends 3
+cooking mama 3
+extreme sports 3
+lofi hiphop 6
+national geo 4
+hbo max 3
+anime world 3
+tech reviews 3
+crypto daily 3
+fitness pro 3
+chess master 3
+travel vlog 3
+comedy club 3
+horror night 3
+space station 3
+daily memes 3
+stock market 3
+nature relax 1
+history ch 1
+gaming hub 1
+fashion week 1
+science lab 1
+auto garage 1
+music charts 1
+movie trailers 1
+art studio 1
+wild life 1
+euro sport 1
+kids zone 1
+mystery box 1
+cyber news 1
+yoga flow 1
+pixel art 1
+jazz cafe 1
+talk show 1
+urban explore 1
+final boss 1
