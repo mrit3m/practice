@@ -1,0 +1,50 @@
+itemchannel
+entertaiment
+17
+18:50
+19:30
+city news
+news
+1
+8:50
+9:00
+city events
+news
+2
+9:00
+9:50
+looking for Alaska
+films
+3
+9:50
+10:50
+13 reasons why
+films
+4
+10:50
+11:50
+a technology program
+news
+5
+11:50
+12:20
+a kitchen program
+entertainment
+6
+12:20
+13:00
+formula 1 racing show
+entertainment
+7
+13:00
+15:00
+brawl stars championship 
+entertainment
+8
+15:00
+16:00
+opera
+entertainment
+9
+16:00
+18:50
