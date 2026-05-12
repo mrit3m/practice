@@ -1,5 +1,5 @@
 itemchannel 6
-RR 0
+RR 1
 vipeRR 3
 ratTV 0
 bbc 0
@@ -40,12 +40,10 @@ movie trailers 1
 art studio 1
 wild life 1
 euro sport 1
-kids zone 1
-mystery box 1
-cyber news 1
+kids zone 2
+cyber news 2
 yoga flow 1
 pixel art 1
 jazz cafe 1
-talk show 1
 urban explore 1
 final boss 1

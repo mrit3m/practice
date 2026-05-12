@@ -158,49 +158,42 @@ void fifth_case() {
 	string name, in, code;
 	cout << "what you want to delete?" << endl;
 	cout << "name of channel: ";
-	cin >> name;
+	getline(cin, name);
 
-	fstream despre_canale("channel.txt");
+	ifstream despre_canale("channel.txt");
 	while (getline(despre_canale, in))
 	{
-		counter++;
 		for_del.push_back(in);
+		counter++;
 		if (in == name) position = counter;
 	}
-	if (position == 0) { cout << "something was wrong..."; return; }
-
-	code = for_del[position - 2];
-	for_del.erase(for_del.begin() + (position - 2), for_del.begin() + (position + 1)); // чтобы удалить элемент 
-
-	fstream rewrite("channel.txt", ios::trunc);// чтобы очистить
-	fstream sti("channel.txt");
-	for (int i = 0; i < for_del.size(); i++) {
-		sti << for_del[i] << endl;
-	}
-	for_del.clear(); // очищение вектора
-	rewrite.close();
-	sti.close();
 	despre_canale.close();
 
-	fstream edit("Telecast.txt");
+	if (position == 0) { cout << "something was wrong..."; for_del.clear(); return; }
 
+	code = for_del[position - 2];
+	for_del.erase(for_del.begin() + (position - 2), for_del.begin() + (position + 1));
+
+	ofstream rewrite("channel.txt", ios::trunc);
+	for (int i = 0; i < for_del.size(); i++) {
+		rewrite << for_del[i] << endl;
+	}
+	rewrite.close();
+	for_del.clear();
+
+	ifstream edit("Telecast.txt");
 	while (getline(edit, in)) {
 		for_del.push_back(in);
 	}
 	edit.close();
 
-	// проходим по блокам из 5 строк С КОНЦА!!!!!!!!!!!!!!!!!!!!!!!
-	// (int)for_del.size() - 5 это индекс начала последнего блока
 	for (int i = (int)for_del.size() - 5; i >= 0; i -= 5) {
-		// Код канала это третья строка блока (индекс i + 2)
 		if (for_del[i + 2] == code) {
-			// Удаляем весь блок из 5 строк разом
 			for_del.erase(for_del.begin() + i, for_del.begin() + i + 5);
 		}
 	}
 
-	// записываем обратно
-	ofstream rewrite_t("Telecast.txt", ios::trunc); //лучше использовать ofstream вместо того что я делал выше с открытием двух потоков
+	ofstream rewrite_t("Telecast.txt", ios::trunc);
 	for (int i = 0; i < for_del.size(); i++) {
 		rewrite_t << for_del[i] << endl;
 	}
@@ -208,43 +201,6 @@ void fifth_case() {
 	for_del.clear();
 	cout << "Deletion complete!" << endl;
 }
-
-
-/*vector<int> pos;
-counter = 0;
-while (getline(edit, in)) {
-	counter++;
-	for_del.push_back(in);
-	if (in == code) pos.push_back(counter);
-}
-int counter1 = 0;
-for (int i = 0; i < for_del.size(); i++) {
-	if (i > 0) pos[i] -= 5;
-	for_del.erase(for_del.begin() + pos[i]);
-	for_del.erase(for_del.begin() + pos[i]);
-	for_del.erase(for_del.begin() + pos[i-1]);
-	for_del.erase(for_del.begin() + pos[i-2]);
-	for_del.erase(for_del.begin() + pos[i-3]);
-
-}
-
-fstream rewrite1("Telecast.txt");
-for (int i = 0; i < for_del.size(); i++) {
-	rewrite1 << for_del[i] << endl;
-}
-
-
-
-
-for_del.clear();
-rewrite1.close();
-edit.close();
-
-
-
-}*/
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 void sixth_case() {
 	string name, in;
@@ -373,7 +329,7 @@ void seventh_case() {
 			if (in == name) pos = counter;
 		}
 		if (pos == 0) { cout << "something was wrong..."; return; }
-		for_del[pos] = new_type;
+		for_del[pos+1] = new_type;
 		ofstream edit("channel.txt", ios::trunc);
 
 		for (int i = 0; i < for_del.size(); i++) {
@@ -545,7 +501,7 @@ void eighth_case() {
 
 
 void ninth_case() { // для файла с каналами и кол-вом программ на них
-	fstream TVprogram("TVprogram.txt");
+	ofstream TVprogram("TVprogram.txt",ios::trunc);
 	fstream despre_canale("channel.txt");
 	fstream despre_emisiuni("Telecast.txt");
 	string in, input;
@@ -760,7 +716,8 @@ int main() {
 			<< "8: editing information about shows" << endl
 			<< "9: file with info about enum shows" << endl
 			<< "0: information about the shortest, longest shows, avg. time shows" << endl
-			<< "q: for schedule" << endl;
+			<< "q: for schedule" << endl
+			<< "c: for exit"<<endl;
 
 		cin >> input;
 		cin.ignore(); // очистит буфер от лишнего энтера

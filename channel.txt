@@ -124,17 +124,13 @@ public
 41
 euro sport
 private
-42
+44
 kids zone
-public
-43
-mystery box
 public
 44
 cyber news
 private
 45
-yoga flow
 public
 46
 pixel art
@@ -142,12 +138,12 @@ public
 47
 jazz cafe
 public
-48
-talk show
-private
 49
 urban explore
 public
 50
 final boss
 private
+100
+jj
+fu
