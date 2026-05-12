@@ -3,6 +3,11 @@ izi
 17
 19:44
 19:50
+gof
+ds
+1
+10:00
+13:00
 only news
 news
 2
@@ -38,11 +43,6 @@ entertainment
 18
 15:00
 16:00
-opera
-entertainment
-9
-16:00
-18:50
 opera
 entertainment
 17
@@ -195,7 +195,7 @@ music
 20:00
 new trailers
 cinema
-38
+54
 19:00
 19:30
 oil painting
@@ -215,14 +215,9 @@ sports
 23:45
 peppa pig
 kids
-42
+44
 07:00
 09:00
-unsolved case
-mystery
-43
-21:00
-22:00
 hacker attack news
 tech
 44
@@ -238,16 +233,6 @@ art
 46
 15:00
 16:00
-smooth jazz
-music
-47
-20:00
-22:00
-night interview
-talk show
-48
-23:00
-00:00
 abandoned places
 explore
 49
@@ -453,9 +438,9 @@ memes
 29
 14:00
 15:00
-dog videos
+doggg
 memes
-29
+294
 18:00
 19:00
 nasdaq live

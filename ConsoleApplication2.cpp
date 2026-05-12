@@ -3,6 +3,8 @@
 #include <string>
 #include <clocale>
 #include <vector>
+#include <iomanip>
+
 using namespace std;
 
 
@@ -26,47 +28,61 @@ struct Program {
 vector <string> for_del;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void first_case() //выводит информацию о каналах
+void first_case()
 {
 	int counter = 0;
 	string in;
-	fstream despre_canale("channel.txt");
+	vector<string> data;
+	ifstream despre_canale("channel.txt");
 
 	while (getline(despre_canale, in))
-	{
-		if (counter % 3 == 0) cout << endl;
-		cout << in << endl;
-		counter++;
-	}
+		data.push_back(in);
+	despre_canale.close();
 
+	cout << left << setw(15) << "Code" << setw(25) << "Name" << setw(20) << "Type" << endl;
+	cout << string(75, '-') << endl;
+
+	for (int i = 0; i + 2 < data.size(); i += 3) {
+		cout << left << setw(15) << data[i]
+			<< setw(25) << data[i + 1]
+			<< setw(20) << data[i + 2] << endl;
+	}
 	cout << endl;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void second_case() //выводит информацию о передачах
+void second_case()
 {
 	int counter = 0;
 	string in;
-	fstream despre_emisiuni("Telecast.txt");
+	vector<string> data;
+	ifstream despre_emisiuni("Telecast.txt");
 
 	while (getline(despre_emisiuni, in))
-	{
-		if (counter % 5 == 0) cout << endl;
-		cout << in << endl;
-		counter++;
-	}
+		data.push_back(in);
+	despre_emisiuni.close();
 
+	cout << left << setw(30) << "Name" << setw(20) << "Type"
+		<< setw(20) << "Code" << setw(20) << "Begin" << setw(20) << "End" << endl;
+	cout << string(100, '-') << endl;
+
+	for (int i = 0; i + 4 < data.size(); i += 5) {
+		cout << left << setw(30) << data[i]
+			<< setw(20) << data[i + 1]
+			<< setw(20) << data[i + 2]
+			<< setw(20) << data[i + 3]
+			<< setw(20) << data[i + 4] << endl;
+	}
 	cout << endl;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void third_case() //добавляет в файл информацию о каналах
+void third_case()
 {
 	string in, code, name, type;
 	int counter = 0;
 
 	cout << "what you want to add? " << endl;
-	fstream despre_canale("channel.txt", ios::app);
 
 	cout << "code of channel: ";
 	cin >> code;
@@ -75,81 +91,72 @@ void third_case() //добавляет в файл информацию о ка�
 	cout << "type of channel: ";
 	cin >> type;
 
-	fstream cheking_canale("channel.txt");
-	while (cheking_canale >> in)
-	{
-		if (in == code or in == name) {
+	ifstream cheking_canale("channel.txt");
+	while (cheking_canale >> in) {
+		if (in == code || in == name) {
 			cout << "you already have channel like this";
+			cheking_canale.close();
 			return;
 		}
-
 	}
+	cheking_canale.close();
 
+	ofstream despre_canale("channel.txt", ios::app);
 	despre_canale << code << endl;
 	despre_canale << name << endl;
 	despre_canale << type << endl;
-
 	despre_canale.close();
-	cheking_canale.close();
-
+	cout << "Channel added successfully" << endl;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void fourth_case()
 {
-	string name, type, code, begin, end;
-	string searching;
+	string name, type, code, begin, end, searching;
 	int counter = 0;
 
-
-
 	cout << "what you want to add? " << endl;
-
-	fstream despre_emisiuni("Telecast.txt", ios::app);
-	fstream despre_canale("channel.txt", ios::app);
-
 	cout << "name of show: ";
-	cin >> name;
+	getline(cin, name);
 	cout << "type of show: ";
-	cin >> type;
+	getline(cin, type);
 	cout << "code of channel: ";
-	cin >> code;
+	getline(cin, code);
 	cout << "begin time of show: ";
-	cin >> begin;
+	getline(cin, begin);
 	cout << "end time of show: ";
-	cin >> end;
+	getline(cin, end);
+	ifstream cheking_canale("channel.txt");
+	while (getline(cheking_canale,searching)) {
+		if (searching == code) counter++;
+		
+	}
+	cheking_canale.close();
 
-
-	fstream cheking_canale("channel.txt"); // чтобы читать сначала
-	while (cheking_canale >> searching)
-	{
-
-		if (searching == code)
-		{
-			counter++;
-		}
+	if (counter == 0) {
+		cout << "you cant add new show without channel";
+		return;
+	}
+	counter = 0;
+	ifstream cheking_emisiuni("Telecast.txt");
+	while (getline(cheking_emisiuni, searching)) {
+		if (searching == name) counter++;
 
 	}
 
-	if (counter == 0)
-	{
-		cout << "you cant add new show without channel"; //ЕСЛИ ТЫ ДОБАВЛЯЕШЬ ПРОГРАММУ С КОДОМ НЕСУЩЕСТВУЮЩЕГО КАНАЛА ТО ОТБОЙ!!
+	if (counter != 0) {
+		cout << "you cant add it";
 		return;
 	}
 
-
-	else
-	{
-		despre_emisiuni << name << endl;
-		despre_emisiuni << type << endl;
-		despre_emisiuni << code << endl;
-		despre_emisiuni << begin << endl;
-		despre_emisiuni << end << endl;
-	}
-
+	ofstream despre_emisiuni("Telecast.txt", ios::app);
+	despre_emisiuni << name << endl;
+	despre_emisiuni << type << endl;
+	despre_emisiuni << code << endl;
+	despre_emisiuni << begin << endl;
+	despre_emisiuni << end << endl;
 	despre_emisiuni.close();
-	despre_canale.close();
-	cheking_canale.close();
+	cout << "show added successfully" << endl;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -215,7 +222,7 @@ void sixth_case() {
 	}
 	despre_emisiuni.close();
 
-	if (pos == 0) { cout << "something was wrong..."; return; }
+	if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return;}
 
 	for_del.erase(for_del.begin() + pos - 1, for_del.begin() + pos + 4);
 
@@ -256,7 +263,7 @@ void seventh_case() {
 			for_del.push_back(in);
 			if (in == code) pos = counter;
 		}
-		if (pos == 0) { cout << "something was wrong..."; return; }
+		if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return; }
 		for_del[pos - 1] = new_code;
 		ofstream edit("channel.txt", ios::trunc);
 
@@ -273,7 +280,7 @@ void seventh_case() {
 			for_del.push_back(in);
 			if (in == code) pos = counter;
 		}
-		if (pos == 0) { cout << "something was wrong..."; return; }
+		if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return; }
 
 		for_del[pos - 1] = new_code;
 		ofstream edit_t("Telecast.txt", ios::trunc);
@@ -286,7 +293,7 @@ void seventh_case() {
 		despre_emisiuni.close();
 		edit.close();
 		despre_canale.close();
-
+		cout << "updated successfully!" << endl;
 	}; break;
 	case '2': {
 		fstream despre_canale("channel.txt");
@@ -300,7 +307,7 @@ void seventh_case() {
 			for_del.push_back(in);
 			if (in == name) pos = counter;
 		}
-		if (pos == 0) { cout << "something was wrong..."; return; }
+		if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return; }
 		for_del[pos - 1] = new_name;
 		ofstream edit("channel.txt", ios::trunc);
 
@@ -315,31 +322,45 @@ void seventh_case() {
 
 		edit.close();
 		despre_canale.close();
+		cout << "updated successfully!" << endl;
+
 	}; break;
 	case '3': {
 		fstream despre_canale("channel.txt");
-		cout << "what type you want to edit?" << endl << "name: ";
+		cout << "what type you want to edit?" << endl << "name of channel: ";
 		cin >> name;
+		cin.ignore(); // очистка буфера
 
-		cout << endl << "new type: ";
+		cout << "new type: ";
 		cin >> new_type;
+		cin.ignore();
+
 		while (getline(despre_canale, in)) {
 			counter++;
 			for_del.push_back(in);
 			if (in == name) pos = counter;
 		}
-		if (pos == 0) { cout << "something was wrong..."; return; }
-		for_del[pos+1] = new_type;
+		despre_canale.close();
+
+		if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return; }
+
+		// проверка что pos+1 не выходит за границы
+		if (pos + 1 > (int)for_del.size()) {
+			cout << "something was wrong...";
+			for_del.clear();
+			return;
+		}
+
+		for_del[pos] = new_type; // pos это 1-based индекс типа (строка после имени)
 		ofstream edit("channel.txt", ios::trunc);
 
 		for (int i = 0; i < for_del.size(); i++) {
 			edit << for_del[i] << endl;
 		}
 
-
 		for_del.clear();
 		edit.close();
-		despre_canale.close();
+		cout << "updated successfully!" << endl;
 	}
 	} /////////////////////////////////////////////////////////////
 }
@@ -370,7 +391,7 @@ void eighth_case() {
 			if ((in == name)) pos = counter;
 			counter++;
 		}
-		if (pos == -1) { cout << "something was wrong..."; return; }
+		if (pos == -1) { cout << "something was wrong..."; for_del.clear(); return; }
 		for_del[pos] = new_name;
 		despre_emisiuni.close();
 		ofstream edit("Telecast.txt", ios::trunc);
@@ -380,6 +401,7 @@ void eighth_case() {
 		}
 		for_del.clear();
 		edit.close();
+		cout << "updated successfully!" << endl;
 
 	} break; // Убрана лишняя точка с запятой
 
@@ -395,7 +417,7 @@ void eighth_case() {
 			if ((in == name)) pos = counter;
 			counter++;
 		}
-		if (pos == -1) { cout << "something was wrong..."; return; }
+		if (pos == -1) { cout << "something was wrong..."; for_del.clear(); return; }
 		for_del[pos + 1] = new_type;
 		despre_emisiuni.close();
 		ofstream edit("Telecast.txt", ios::trunc);
@@ -405,6 +427,8 @@ void eighth_case() {
 		}
 		for_del.clear();
 		edit.close();
+		cout << "updated successfully!" << endl;
+
 	} break;
 
 	case '3': {
@@ -419,7 +443,7 @@ void eighth_case() {
 			if ((in == code)) pos = counter;
 			counter++;
 		}
-		if (pos == -1) { cout << "something was wrong..."; return; }
+		if (pos == -1) { cout << "something was wrong..."; for_del.clear(); return; }
 		for_del[pos] = new_code;
 		despre_emisiuni.close();
 		ofstream edit("Telecast.txt", ios::trunc);
@@ -438,7 +462,7 @@ void eighth_case() {
 			if ((in == code)) pos = counter;
 			counter++;
 		}
-		if (pos == -1) { cout << "something was wrong..."; return; }
+		if (pos == -1) { cout << "something was wrong..."; for_del.clear(); return; }
 		for_del[pos] = new_code;
 		despre_canale.close();
 		ofstream edit_t("channel.txt", ios::trunc);
@@ -447,6 +471,8 @@ void eighth_case() {
 		}
 		for_del.clear();
 		edit_t.close();
+		cout << "updated successfully!" << endl;
+
 	} break;
 	case '4': {
 		fstream despre_emisiuni("Telecast.txt");
@@ -460,7 +486,7 @@ void eighth_case() {
 			if ((in == name)) pos = counter;
 			counter++;
 		}
-		if (pos == -1) { cout << "something was wrong..."; return; }
+		if (pos == -1) { cout << "something was wrong..."; for_del.clear(); return; }
 		for_del[pos + 3] = new_begin;
 		despre_emisiuni.close();
 		ofstream edit("Telecast.txt", ios::trunc);
@@ -470,6 +496,7 @@ void eighth_case() {
 		}
 		for_del.clear();
 		edit.close();
+		cout << "updated successfully!" << endl;
 
 
 	} break;
@@ -485,7 +512,7 @@ void eighth_case() {
 			if ((in == name)) pos = counter;
 			counter++;
 		}
-		if (pos == -1) { cout << "something was wrong..."; return; }
+		if (pos == -1) { cout << "something was wrong..."; for_del.clear(); return; }
 		for_del[pos + 4] = new_end;
 		despre_emisiuni.close();
 		ofstream edit("Telecast.txt", ios::trunc);
@@ -495,6 +522,8 @@ void eighth_case() {
 		}
 		for_del.clear();
 		edit.close();
+		cout << "updated successfully!" << endl;
+
 	}
 	}
 }
