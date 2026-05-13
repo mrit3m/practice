@@ -1,4 +1,4 @@
-itemchannel 6
+itemchannel 5
 RR 1
 vipeRR 3
 ratTV 0
@@ -7,15 +7,15 @@ pepeFo 1
 khekhe 1
 f1 1
 brawl stars esports 0
-balet channel 1
+balet channel 0
 discovery 3
-cnn news 3
+cnn 3
 netflix series 3
 dota2 main 3
 cs legends 3
 cooking mama 3
 extreme sports 3
-lofi hiphop 6
+lofi hiphop 1
 national geo 4
 hbo max 3
 anime world 3
@@ -40,10 +40,8 @@ movie trailers 1
 art studio 1
 wild life 1
 euro sport 1
-kids zone 2
-cyber news 2
-yoga flow 1
-pixel art 1
-jazz cafe 1
-urban explore 1
+kids zone 1
+cyber news 1
+pixel art 0
+urban explore 0
 final boss 1
