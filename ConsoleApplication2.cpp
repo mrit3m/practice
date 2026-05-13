@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <clocale>
@@ -127,9 +127,9 @@ void fourth_case()
 	cout << "end time of show: ";
 	getline(cin, end);
 	ifstream cheking_canale("channel.txt");
-	while (getline(cheking_canale,searching)) {
+	while (getline(cheking_canale, searching)) {
 		if (searching == code) counter++;
-		
+
 	}
 	cheking_canale.close();
 
@@ -222,7 +222,7 @@ void sixth_case() {
 	}
 	despre_emisiuni.close();
 
-	if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return;}
+	if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return; }
 
 	for_del.erase(for_del.begin() + pos - 1, for_del.begin() + pos + 4);
 
@@ -239,7 +239,7 @@ void sixth_case() {
 void seventh_case() {
 	char input;
 	string in, code, new_code, name, new_name, type, new_type;
-	int counter = 0, pos = -1; 
+	int counter = 0, pos = -1;
 	cout << "what you want to edit?" << endl
 		<< "1: information about code" << endl
 		<< "2: information about name" << endl
@@ -443,46 +443,40 @@ void eighth_case() {
 
 	case '3': {
 		ifstream despre_emisiuni("Telecast.txt");
-		cout << "what show you wanna edit?" << endl << "code: " << endl;
-		getline(cin, code);
+		cout << "what show you wanna edit?" << endl << "name of show: " << endl;
+		getline(cin, name);
+		if (!name.empty() && name.back() == '\r') name.pop_back();
 		cout << "new code: ";
 		getline(cin, new_code);
+		if (!new_code.empty() && new_code.back() == '\r') new_code.pop_back();
+
+		// проверка что новый код существует в channel.txt
+		ifstream check_canal("channel.txt");
+		int found = 0;
+		while (getline(check_canal, in)) {
+			if (!in.empty() && in.back() == '\r') in.pop_back();
+			if (in == new_code) found++;
+		}
+		check_canal.close();
+		if (found == 0) { cout << "channel with this code not found"; return; }
+
 		while (getline(despre_emisiuni, in)) {
-
+			if (!in.empty() && in.back() == '\r') in.pop_back();
 			for_del.push_back(in);
-			if ((in == code)) pos = counter;
+			if (in == name) pos = counter;
 			counter++;
 		}
-		if (pos == -1) { cout << "something was wrong..."; for_del.clear(); return; }
-		for_del[pos] = new_code;
 		despre_emisiuni.close();
+
+		if (pos == -1) { cout << "show with this name not found"; for_del.clear(); return; }
+
+		for_del[pos + 2] = new_code; // код это третья строка блока
 		ofstream edit("Telecast.txt", ios::trunc);
-
-		for (int i = 0; i < for_del.size(); i++) {
+		for (int i = 0; i < for_del.size(); i++)
 			edit << for_del[i] << endl;
-		}
-		for_del.clear();
 		edit.close();
-		pos = -1;
-		counter = 0;
-
-		ifstream despre_canale("channel.txt");
-		while (getline(despre_canale, in)) {
-			for_del.push_back(in);
-			if ((in == code)) pos = counter;
-			counter++;
-		}
-		if (pos == -1) { cout << "something was wrong..."; for_del.clear(); return; }
-		for_del[pos] = new_code;
-		despre_canale.close();
-		ofstream edit_t("channel.txt", ios::trunc);
-		for (int i = 0; i < for_del.size(); i++) {
-			edit_t << for_del[i] << endl;
-		}
 		for_del.clear();
-		edit_t.close();
 		cout << "updated successfully!" << endl;
-
 	} break;
 	case '4': {
 		fstream despre_emisiuni("Telecast.txt");
@@ -538,7 +532,7 @@ void eighth_case() {
 
 
 void ninth_case() { // для файла с каналами и кол-вом программ на них
-	ofstream TVprogram("TVprogram.txt",ios::trunc);
+	ofstream TVprogram("TVprogram.txt", ios::trunc);
 	fstream despre_canale("channel.txt");
 	fstream despre_emisiuni("Telecast.txt");
 	string in, input;
@@ -754,7 +748,7 @@ int main() {
 			<< "9: file with info about enum shows" << endl
 			<< "0: information about the shortest, longest shows, avg. time shows" << endl
 			<< "q: for schedule" << endl
-			<< "c: for exit"<<endl;
+			<< "c: for exit" << endl;
 
 		cin >> input;
 		cin.ignore(); // очистит буфер от лишнего энтера
