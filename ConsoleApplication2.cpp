@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 
 
@@ -14,10 +14,6 @@ void eighth_case();
 void ninth_case();
 void tenth_case();
 void eleventh_case();
-
-
-
-
 
 
 int main() {
