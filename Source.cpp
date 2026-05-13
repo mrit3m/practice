@@ -4,6 +4,7 @@
 #include <clocale>
 #include <vector>
 #include <iomanip>
+#include <sstream> // для безопасного чтения времени
 
 using namespace std;
 
@@ -571,54 +572,62 @@ void ninth_case() { // для файла с каналами и кол-вом программ на них
 	despre_emisiuni.close();
 	for_del.clear();
 }
+
+
+
 void tenth_case()
 {
-	fstream despre_canale("channel.txt");
-	fstream despre_emisiuni("Telecast.txt");
+	ifstream file("Telecast.txt");
+	if (!file) return;
 
-	vector<string> timeB;
-	vector<string> timeE;
-	vector<int> time;
-	string in;
+	string line;
+	vector<int> durations;
 	int counter = 0;
+	string timeB, timeE;
 
-	while (getline(despre_emisiuni, in)) {
-		if (counter % 5 == 3) timeB.push_back(in);
-		if (counter % 5 == 4) timeE.push_back(in);
+	while (getline(file, line)) {
+		if (counter % 5 == 3) timeB = line;
+		if (counter % 5 == 4) {
+			timeE = line;
+
+			// БЕЗОПАСНЫЙ СБОРОК ВРЕМЕНИ БЕЗ STOI И SUBSTR
+			int h1, m1, h2, m2;
+			char colon; // Сюда запишется двоеточие ':'
+
+			stringstream ss1(timeB);
+			stringstream ss2(timeE);
+
+			// Если время считалось успешно (например, 18 : 30)
+			if (ss1 >> h1 >> colon >> m1 && ss2 >> h2 >> colon >> m2) {
+				int begin = h1 * 60 + m1;
+				int end = h2 * 60 + m2;
+
+				int duration = end - begin;
+				if (duration < 0) duration += 1440; // Если шоу закончилось на следующий день
+
+				durations.push_back(duration);
+			}
+		}
 		counter++;
 	}
 
-	for (int i = 0; i < timeB.size(); i++) {
-		int hours, mins, hours1, mins1;
-		int begin, end;
-		hours = stoi(timeB[i].substr(0, 2));
-		mins = stoi(timeB[i].substr(3, 2));
-		hours1 = stoi(timeE[i].substr(0, 2));
-		mins1 = stoi(timeE[i].substr(3, 2));
+	if (durations.empty()) return;
 
-		begin = hours * 60 + mins;
-		end = hours1 * 60 + mins1;
+	int min_val = durations[0];
+	int max_val = durations[0];
+	double sum = 0;
 
-		int duration = end - begin;
-		if (duration < 0) duration += 1440;
-		time.push_back(duration);
+	for (int i = 0; i < durations.size(); i++) {
+		if (durations[i] < min_val) min_val = durations[i];
+		if (durations[i] > max_val) max_val = durations[i];
+		sum += durations[i];
 	}
 
-	if (time.empty()) return;
-
-	int min_val = time[0], max_val = time[0];
-	double avg = 0;
-
-	for (int i = 0; i < time.size(); i++) {
-		if (time[i] < min_val) min_val = time[i];
-		if (time[i] > max_val) max_val = time[i];
-		avg += time[i];
-	}
-
-	cout << max_val << " the longest show" << endl
-		<< min_val << " the shortest show" << endl
-		<< avg / time.size() << " avg shows";
+	cout << max_val << " the longest show" << endl;
+	cout << min_val << " the shortest show" << endl;
+	cout << sum / durations.size() << " avg shows" << endl;
 }
+
 
 
 //void eleventh_case() {
