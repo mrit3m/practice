@@ -22,7 +22,7 @@ public
 7
 f1
 private
-8
+88
 brawl stars esports
 public
 9
@@ -32,11 +32,11 @@ public
 discovery
 public
 11
-cnn news
-public
+cnn
+private
 12
 netflix series
-private
+public
 13
 dota2 main
 public
@@ -49,7 +49,7 @@ public
 16
 extreme sports
 public
-17
+77
 lofi hiphop
 public
 18
@@ -85,7 +85,7 @@ public
 28
 space station
 public
-29
+28
 daily memes
 public
 30
@@ -127,23 +127,15 @@ private
 44
 kids zone
 public
-44
+444
 cyber news
 private
-45
-public
 46
 pixel art
 public
-47
-jazz cafe
-public
-49
+888
 urban explore
 public
 50
 final boss
 private
-100
-jjj
-jjj

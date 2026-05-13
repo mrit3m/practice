@@ -239,127 +239,137 @@ void sixth_case() {
 void seventh_case() {
 	char input;
 	string in, code, new_code, name, new_name, type, new_type;
-	int counter = 0, pos = 0;
+	int counter = 0, pos = -1; 
 	cout << "what you want to edit?" << endl
 		<< "1: information about code" << endl
 		<< "2: information about name" << endl
 		<< "3: information about type" << endl;
 	cin >> input;
-
+	cin.ignore();
 
 
 
 
 	switch (input) {
 	case '1': {
-		fstream despre_canale("channel.txt");
 		cout << "what code you want to edit?" << endl << "Code: ";
 		cin >> code;
-
-		cout << endl << "new code: ";
+		cin.ignore();
+		cout << "new code: ";
 		cin >> new_code;
-		while (getline(despre_canale, in)) {
-			counter++;
+		cin.ignore();
+
+		ifstream read_c("channel.txt");
+		while (getline(read_c, in)) {
 			for_del.push_back(in);
 			if (in == code) pos = counter;
+			counter++;
 		}
-		if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return; }
-		for_del[pos - 1] = new_code;
-		ofstream edit("channel.txt", ios::trunc);
+		read_c.close();
 
+		if (pos == -1) { cout << "channel with this code not found"; for_del.clear(); return; }
+
+		// проверка что новый код не занят
 		for (int i = 0; i < for_del.size(); i++) {
-			edit << for_del[i] << endl;
+			if (for_del[i] == new_code) {
+				cout << "channel with this code already exists";
+				for_del.clear();
+				return;
+			}
 		}
+
+		for_del[pos] = new_code;
+
+		ofstream edit("channel.txt", ios::trunc);
+		for (int i = 0; i < for_del.size(); i++)
+			edit << for_del[i] << endl;
+		edit.close();
 		for_del.clear();
-		pos = 0;
+		pos = -1;
 		counter = 0;
 
-		fstream despre_emisiuni("Telecast.txt");
-		while (getline(despre_emisiuni, in)) {
-			counter++;
+		ifstream read_t("Telecast.txt");
+		while (getline(read_t, in)) {
 			for_del.push_back(in);
 			if (in == code) pos = counter;
+			counter++;
 		}
-		if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return; }
+		read_t.close();
 
-		for_del[pos - 1] = new_code;
-		ofstream edit_t("Telecast.txt", ios::trunc);
-		for (int i = 0; i < for_del.size(); i++) {
-			edit_t << for_del[i] << endl;
+		if (pos != -1) {
+			for_del[pos] = new_code;
+			ofstream edit_t("Telecast.txt", ios::trunc);
+			for (int i = 0; i < for_del.size(); i++)
+				edit_t << for_del[i] << endl;
+			edit_t.close();
 		}
-
-		edit_t.close();
 		for_del.clear();
-		despre_emisiuni.close();
-		edit.close();
-		despre_canale.close();
 		cout << "updated successfully!" << endl;
 	}; break;
 	case '2': {
-		fstream despre_canale("channel.txt");
 		cout << "what name you want to edit?" << endl << "name: ";
-		cin >> name;
+		getline(cin, name);
+		if (!name.empty() && name.back() == '\r') name.pop_back();
+		cout << "new name: ";
+		getline(cin, new_name);
+		if (!new_name.empty() && new_name.back() == '\r') new_name.pop_back();
 
-		cout << endl << "new name: ";
-		cin >> new_name;
-		while (getline(despre_canale, in)) {
-			counter++;
+		ifstream read_c("channel.txt");
+		while (getline(read_c, in)) {
+			if (!in.empty() && in.back() == '\r') in.pop_back();
 			for_del.push_back(in);
 			if (in == name) pos = counter;
+			counter++;
 		}
-		if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return; }
-		for_del[pos - 1] = new_name;
-		ofstream edit("channel.txt", ios::trunc);
+		read_c.close();
+
+		if (pos == -1) { cout << "channel with this name not found"; for_del.clear(); return; }
 
 		for (int i = 0; i < for_del.size(); i++) {
-			edit << for_del[i] << endl;
+			if (for_del[i] == new_name) {
+				cout << "channel with this name already exists";
+				for_del.clear();
+				return;
+			}
 		}
 
+		for_del[pos] = new_name;
 
-
-
-		for_del.clear();
-
+		ofstream edit("channel.txt", ios::trunc);
+		for (int i = 0; i < for_del.size(); i++)
+			edit << for_del[i] << endl;
 		edit.close();
-		despre_canale.close();
+		for_del.clear();
 		cout << "updated successfully!" << endl;
-
 	}; break;
 	case '3': {
-		fstream despre_canale("channel.txt");
 		cout << "what type you want to edit?" << endl << "name of channel: ";
-		cin >> name;
-		cin.ignore(); // очистка буфера
-
+		getline(cin, name);
+		if (!name.empty() && name.back() == '\r') name.pop_back();
 		cout << "new type: ";
-		cin >> new_type;
-		cin.ignore();
+		getline(cin, new_type);
+		if (!new_type.empty() && new_type.back() == '\r') new_type.pop_back();
 
-		while (getline(despre_canale, in)) {
-			counter++;
+		ifstream read_c("channel.txt");
+		while (getline(read_c, in)) {
+			if (!in.empty() && in.back() == '\r') in.pop_back();
 			for_del.push_back(in);
 			if (in == name) pos = counter;
+			counter++;
 		}
-		despre_canale.close();
+		read_c.close();
 
-		if (pos == 0) { cout << "something was wrong..."; for_del.clear(); return; }
+		if (pos == -1) { cout << "channel with this name not found"; for_del.clear(); return; }
 
-		// проверка что pos+1 не выходит за границы
-		if (pos + 1 > (int)for_del.size()) {
-			cout << "something was wrong...";
-			for_del.clear();
-			return;
-		}
+		if (pos + 1 >= (int)for_del.size()) { cout << "something was wrong..."; for_del.clear(); return; }
 
-		for_del[pos] = new_type; // pos это 1-based индекс типа (строка после имени)
+		for_del[pos + 1] = new_type;
+
 		ofstream edit("channel.txt", ios::trunc);
-
-		for (int i = 0; i < for_del.size(); i++) {
+		for (int i = 0; i < for_del.size(); i++)
 			edit << for_del[i] << endl;
-		}
-
-		for_del.clear();
 		edit.close();
+		for_del.clear();
 		cout << "updated successfully!" << endl;
 	}
 	} /////////////////////////////////////////////////////////////
@@ -476,54 +486,52 @@ void eighth_case() {
 	} break;
 	case '4': {
 		fstream despre_emisiuni("Telecast.txt");
-		cout << "what show you wanna edit?" << endl << "name of show you wanna edit begining time: " << endl;
+		cout << "what show you wanna edit?" << endl << "name: " << endl;
 		getline(cin, name);
+		if (!name.empty() && name.back() == '\r') name.pop_back();
 		cout << "new begining time: ";
 		getline(cin, new_begin);
+		if (!new_begin.empty() && new_begin.back() == '\r') new_begin.pop_back();
 		while (getline(despre_emisiuni, in)) {
-
+			if (!in.empty() && in.back() == '\r') in.pop_back();
 			for_del.push_back(in);
-			if ((in == name)) pos = counter;
+			if (in == name) pos = counter;
 			counter++;
 		}
 		if (pos == -1) { cout << "something was wrong..."; for_del.clear(); return; }
 		for_del[pos + 3] = new_begin;
 		despre_emisiuni.close();
 		ofstream edit("Telecast.txt", ios::trunc);
-
-		for (int i = 0; i < for_del.size(); i++) {
+		for (int i = 0; i < for_del.size(); i++)
 			edit << for_del[i] << endl;
-		}
 		for_del.clear();
 		edit.close();
 		cout << "updated successfully!" << endl;
-
-
 	} break;
+
 	case '5': {
 		fstream despre_emisiuni("Telecast.txt");
-		cout << "what show you wanna edit?" << endl << "name of show you wanna edit begining time: " << endl;
+		cout << "what show you wanna edit?" << endl << "name: " << endl;
 		getline(cin, name);
-		cout << "new begining time: ";
+		if (!name.empty() && name.back() == '\r') name.pop_back();
+		cout << "new ending time: ";
 		getline(cin, new_end);
+		if (!new_end.empty() && new_end.back() == '\r') new_end.pop_back();
 		while (getline(despre_emisiuni, in)) {
-
+			if (!in.empty() && in.back() == '\r') in.pop_back();
 			for_del.push_back(in);
-			if ((in == name)) pos = counter;
+			if (in == name) pos = counter;
 			counter++;
 		}
 		if (pos == -1) { cout << "something was wrong..."; for_del.clear(); return; }
 		for_del[pos + 4] = new_end;
 		despre_emisiuni.close();
 		ofstream edit("Telecast.txt", ios::trunc);
-
-		for (int i = 0; i < for_del.size(); i++) {
+		for (int i = 0; i < for_del.size(); i++)
 			edit << for_del[i] << endl;
-		}
 		for_del.clear();
 		edit.close();
 		cout << "updated successfully!" << endl;
-
 	}
 	}
 }
